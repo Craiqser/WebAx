@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAx.Server", "WebAx\Serve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAx.Client", "WebAx\Client\WebAx.Client.csproj", "{7C332641-A335-405A-89AC-634209276373}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAx.Shared", "WebAx\Shared\WebAx.Shared.csproj", "{90C18723-430D-40D6-B294-B68DAB4D20AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAx", "WebAx\WebAx\WebAx.csproj", "{90C18723-430D-40D6-B294-B68DAB4D20AB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraB.Core", "..\CraB\CraB.Core\CraB.Core.csproj", "{F8B15610-0FD3-4D25-AE24-8740DE374DEB}"
 EndProject

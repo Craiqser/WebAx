@@ -20,7 +20,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Client\WebAx.Client.csproj" />
-		<ProjectReference Include="..\Shared\WebAx.Shared.csproj" />
+		<ProjectReference Include="..\Shared\WebAx.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

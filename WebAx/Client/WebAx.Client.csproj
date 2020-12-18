@@ -44,7 +44,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\CraB\CraB.Web\CraB.Web.csproj" />
-		<ProjectReference Include="..\Shared\WebAx.Shared.csproj" />
+		<ProjectReference Include="..\WebAx\WebAx.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

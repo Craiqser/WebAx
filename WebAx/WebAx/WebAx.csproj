@@ -25,4 +25,8 @@
 			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\CraB\CraB.Web\CraB.Web.csproj" />
+	</ItemGroup>
 </Project>

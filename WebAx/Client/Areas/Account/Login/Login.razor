@@ -1,0 +1,46 @@
+﻿@page "/Account/Login"
+@layout EmptyLayout
+@inherits LoginPage
+<MessageTitled Title=@L.Get("User:Auth:Authentication") Message=@L.Get("User:Auth:AppLogin") />
+<div class="card-wrapper" style="font-size: 14px;">
+	<div class="card border-secondary bg-light m-auto" style="width: 450px;">
+		<h5 class="card-header">@L.Get("User:Auth:AppLogin")</h5>
+		<div class="card-body">
+			<EditForm Model="LoginModel" OnValidSubmit="@HandleLoginAsync">
+				<DataAnnotationsValidator />
+				<div class="form-group">
+					<label for="username">@L.Get("User:Auth:Login")</label>
+					<div class="input-group mb-3">
+						<InputText id="username" class="form-control" @bind-Value="LoginModel.UserName" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="oi oi-person"></span>
+							</div>
+						</div>
+					</div>
+					<ValidationMessage For="@(() => LoginModel.UserName)" />
+				</div>
+				<div class="form-group">
+					<label for="password">@L.Get("User:Auth:Password")</label>
+					<div class="input-group mb-3">
+						<InputText id="password" type="password" class="form-control" @bind-Value="LoginModel.Password" />
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="oi oi-key"></span>
+							</div>
+						</div>
+					</div>
+					<ValidationMessage For="@(() => LoginModel.Password)" />
+				</div>
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary">@L.Get("User:Auth:SignIn")</button>
+					<NavLink class="nav-link" href="/Account/Register">@L.Get("User:Auth:Register")</NavLink>
+				</div>
+			</EditForm>
+		</div>
+		@if (Error != null && Error.Length > 0)
+		{
+			<div class="alert alert-danger mx-auto" role="alert">@Error</div>
+		}
+	</div>
+</div>
