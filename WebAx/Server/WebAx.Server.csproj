@@ -20,7 +20,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Client\WebAx.Client.csproj" />
-		<ProjectReference Include="..\Shared\WebAx.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,9 +27,5 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	</ItemGroup>
 </Project>
