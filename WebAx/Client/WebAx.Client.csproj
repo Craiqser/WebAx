@@ -1,11 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<Authors>Craiqser</Authors>
+		<Company>Craiqser</Company>
+		<Copyright>Copyright © Craiqser</Copyright>
+		<Description>Blazor WebAssembly client-server API-based system.</Description>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+		<PackageIcon>icon-512.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Product>WebAx</Product>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/Craiqser/WebAx.git</RepositoryUrl>
+		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,6 +27,10 @@
 
 	<ItemGroup>
 		<None Include="compilerconfig.json" />
+		<None Include="wwwroot\icon-512.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -30,6 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\CraB\CraB.Web\CraB.Web.csproj" />
 		<ProjectReference Include="..\Shared\WebAx.Shared.csproj" />
 	</ItemGroup>
 

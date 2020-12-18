@@ -1,8 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<Authors>Craiqser</Authors>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+		<Copyright>Copyright © Craiqser</Copyright>
+		<Description>Blazor WebAssembly client-server API-based system.</Description>
+		<PackageIcon>icon-512.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Product>WebAx</Product>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/Craiqser/WebAx.git</RepositoryUrl>
+		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,5 +21,16 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Client\WebAx.Client.csproj" />
 		<ProjectReference Include="..\Shared\WebAx.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\Client\wwwroot\icon-512.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
 	</ItemGroup>
 </Project>

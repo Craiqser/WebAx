@@ -1,10 +1,12 @@
 using Blazored.LocalStorage;
 using Blazored.SessionStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebAx.Client.Areas.Account;
 
 namespace WebAx.Client
 {
@@ -24,7 +26,7 @@ namespace WebAx.Client
 
 			_ = builder.Services.AddAuthorizationCore();
 			_ = builder.Services.AddScoped<AuthenticationStateProvider, AuthNStateProvider>();
-			_ = builder.Services.AddScoped<IAuthNService, AuthNService>();
+			// _ = builder.Services.AddScoped<IAuthNService, AuthNService>();
 
 			WebAssemblyHost host = builder.Build();
 			await host.RunAsync();

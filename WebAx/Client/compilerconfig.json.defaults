@@ -1,32 +1,5 @@
 {
 	"compilers": {
-		"less": {
-			"autoPrefix": "",
-			"cssComb": "none",
-			"ieCompat": true,
-			"strictMath": false,
-			"strictUnits": false,
-			"relativeUrls": true,
-			"rootPath": "",
-			"sourceMapRoot": "",
-			"sourceMapBasePath": "",
-			"sourceMap": false
-		},
-		"sass": {
-			"autoPrefix": "",
-			"includePath": "",
-			"indentType": "tab",
-			"indentWidth": 1,
-			"outputStyle": "nested",
-			"Precision": 5,
-			"relativeUrls": true,
-			"sourceMapRoot": "",
-			"lineFeed": "",
-			"sourceMap": false
-		},
-		"stylus": {
-			"sourceMap": false
-		},
 		"babel": {
 			"sourceMap": false
 		},
@@ -36,28 +9,55 @@
 			"sourceMap": false
 		},
 		"handlebars": {
-			"root": "",
-			"noBOM": false,
-			"name": "",
-			"namespace": "",
-			"knownHelpersOnly": false,
+			"amd": false,
+			"commonjs": "",
 			"forcePartial": false,
 			"knownHelpers": [],
-			"commonjs": "",
-			"amd": false,
+			"knownHelpersOnly": false,
+			"name": "",
+			"namespace": "",
+			"noBOM": false,
+			"root": "",
+			"sourceMap": false
+		},
+		"less": {
+			"autoPrefix": "",
+			"cssComb": "none",
+			"ieCompat": true,
+			"relativeUrls": true,
+			"rootPath": "",
+			"sourceMap": false,
+			"sourceMapBasePath": "",
+			"sourceMapRoot": "",
+			"strictMath": false,
+			"strictUnits": false
+		},
+		"sass": {
+			"autoPrefix": "",
+			"includePath": "",
+			"indentType": "tab",
+			"indentWidth": 1,
+			"lineFeed": "",
+			"outputStyle": "nested",
+			"Precision": 5,
+			"relativeUrls": true,
+			"sourceMap": false,
+			"sourceMapRoot": ""
+		},
+		"stylus": {
 			"sourceMap": false
 		}
 	},
 	"minifiers": {
 		"css": {
 			"enabled": true,
-			"termSemicolons": true,
-			"gzip": false
+			"gzip": false,
+			"termSemicolons": true
 		},
 		"javascript": {
 			"enabled": true,
-			"termSemicolons": true,
-			"gzip": false
+			"gzip": false,
+			"termSemicolons": true
 		}
 	}
 }
