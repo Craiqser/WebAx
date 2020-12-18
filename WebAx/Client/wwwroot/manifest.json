@@ -1,0 +1,15 @@
+{
+	"background_color": "#ffffff",
+	"display": "standalone",
+	"name": "WebAx",
+	"short_name": "WebAx",
+	"start_url": "./",
+	"theme_color": "#03173d",
+	"icons": [
+		{
+			"src": "icon-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	]
+}

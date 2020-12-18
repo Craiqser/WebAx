@@ -1,0 +1,10 @@
+﻿<div style="display: inline-flex">
+	<div>
+		<strong>@ToastType</strong>
+		<span>@Message</span>
+	</div>
+</div>
+@code {
+	[Parameter] public string Message { get; set; }
+	[Parameter] public string ToastType { get; set; } = "info"; // info (default), warning, error.
+}
