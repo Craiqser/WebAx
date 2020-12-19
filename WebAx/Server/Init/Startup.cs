@@ -1,55 +1,63 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace WebAx.Server
 {
 	public class Startup
 	{
+		public IConfiguration Configuration { get; }
+
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
 		}
 
-		public IConfiguration Configuration { get; }
-
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+		// Добавляет сервисы в контейнер приложения (https://go.microsoft.com/fwlink/?LinkID=398940).
 		public void ConfigureServices(IServiceCollection services)
 		{
+			_ = services.WebAxConfigureServices(Configuration);
 
-			services.AddControllersWithViews();
-			services.AddRazorPages();
+			_ = services.AddControllersWithViews();
+			_ = services.AddRazorPages();
+			_ = services.AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			_ = app.UseResponseCompression();
+
 			if (env.IsDevelopment())
 			{
-				app.UseDeveloperExceptionPage();
+				_ = app.UseDeveloperExceptionPage();
 				app.UseWebAssemblyDebugging();
 			}
 			else
 			{
-				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
+				_ = app.UseExceptionHandler("/Error");
+				_ = app.UseHsts(); // Значение по-умолчанию: 30 дней (https://aka.ms/aspnetcore-hsts).
 			}
 
-			app.UseHttpsRedirection();
-			app.UseBlazorFrameworkFiles();
-			app.UseStaticFiles();
+			_ = app.WebAxConfigure();
 
-			app.UseRouting();
+			_ = app.UseHttpsRedirection();
+			_ = app.UseBlazorFrameworkFiles();
+			_ = app.UseStaticFiles();
 
-			app.UseEndpoints(endpoints =>
+			_ = app.UseRouting();
+
+			_ = app.UseAuthentication();
+			_ = app.UseAuthorization();
+
+			_ = app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapRazorPages();
-				endpoints.MapControllers();
-				endpoints.MapFallbackToFile("index.html");
+				_ = endpoints.MapRazorPages();
+				_ = endpoints.MapControllers();
+				_ = endpoints.MapFallbackToFile("index.html");
 			});
 		}
 	}

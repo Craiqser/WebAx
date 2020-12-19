@@ -21,18 +21,16 @@ namespace WebAx.Client.Areas.Account.Login
 			Error = string.Empty;
 			LoginResponseModel loginResponseModel = (LoginResponseModel)await AuthNService.Login(LoginModel).ConfigureAwait(true);
 
-			if (loginResponseModel.Successful)
+			if (loginResponseModel.ErrorKey.Length == 0)
 			{
-				await SessionStorage.SetItemAsync(ConstSession.AreaIdKey, loginResponseModel.AreaId).ConfigureAwait(false);
-				await SessionStorage.SetItemAsync(ConstSession.DataAreasKey, loginResponseModel.DataAreas).ConfigureAwait(false);
-				await SessionStorage.SetItemAsync(ConstSession.LangIdUIKey, CultureHelper.LangId(loginResponseModel.LangId)).ConfigureAwait(false);
-				await SessionStorage.SetItemAsync(ConstSession.UserCodeKey, loginResponseModel.UserCode).ConfigureAwait(false);
-
-				NavigationManager.NavigateTo("/");
+				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, loginResponseModel.ErrorKey);
+				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, CultureHelper.LangId(loginResponseModel.TokenAccess));
+				await SessionStorage.SetItemAsync(SessionKeys.UserDataKey, loginResponseModel.UserData.ToString());
+				NavigationManager.NavigateTo("/Account");
 			}
 			else
 			{
-				Error = loginResponseModel.ErrorDescr;
+				Error = loginResponseModel.ErrorKey;
 			}
 		}
 	}

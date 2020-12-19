@@ -33,5 +33,19 @@ namespace WebAx.Client.Areas.Account
 
 			return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtSettings.ParseClaimsFromJwt(token), JwtSettings.AuthType)));
 		}
+
+		public void MarkUserAsAuthenticated(string token)
+		{
+			ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(JwtSettings.ParseClaimsFromJwt(token), JwtSettings.AuthType));
+			Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(claimsPrincipal));
+			NotifyAuthenticationStateChanged(authState);
+		}
+
+		public void MarkUserAsLoggedOut()
+		{
+			ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity());
+			Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(claimsPrincipal));
+			NotifyAuthenticationStateChanged(authState);
+		}
 	}
 }
