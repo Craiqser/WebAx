@@ -1,0 +1,14 @@
+﻿@inherits BaseLayoutPage
+<AuthorizeView>
+	<NotAuthorized>
+		<LoginRedirect />
+	</NotAuthorized>
+	<Authorizing>
+		<Toast Message="User.Auth.CredentialsCheck" />
+	</Authorizing>
+	<Authorized>
+		<CascadingValue Value="@DaxState" Name="DaxStateValue">
+			@Body
+		</CascadingValue>
+	</Authorized>
+</AuthorizeView>

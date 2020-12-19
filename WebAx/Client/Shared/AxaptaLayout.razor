@@ -1,0 +1,94 @@
+﻿@inherits AxaptaLayoutPage
+<AuthorizeView>
+	<NotAuthorized>
+		<LoginRedirect />
+	</NotAuthorized>
+	<Authorizing>
+		<Toast Message="User.Auth.CredentialsCheck" />
+	</Authorizing>
+	<Authorized>
+		<CascadingValue Value="@DaxState" Name="DaxStateValue">
+			<div id="app">
+				<header>
+					<div class="header-line1">
+						<button class="btn-menu oi oi-menu" @onclick="MenuAreaToggle"></button>
+						<!--
+	<BCComponent OnCompanyChanged=@AreaIdUpdated OnModuleChanged=@ModuleIdUpdated />
+		-->
+					</div>
+					<div class="header-line2">
+						<div class="btn-panel">
+							<span class="vl"></span>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/1.png" alt="Создать"></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/2.png" alt="Открыть"></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/3.png" alt="Сохранить"></div>
+							<span class="vl"></span>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/4.png" alt="Печать..."></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/5.png" alt="Предварительный просмотр"></div>
+							<div class="menu-btn-wrp"><img src="/img/btns/6.png" alt="Открыть новую рабочую область"></div>
+							<span class="vl"></span>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/7.png" alt="Вырезать"></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/8.png" alt="Копировать"></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/9.png" alt="Вставить"></div>
+							<span class="vl"></span>
+							<div class="menu-btn-wrp"><img src="/img/btns/10.png" alt="Найти..."></div>
+							<div class="menu-btn-wrp-dis"><img src="/img/btns/11.png" alt="Найти далее"></div>
+						</div>
+					</div>
+				</header>
+				<main>
+					<div class="content">
+						<div id="menuarea" style="display: @MenuAreaDisplayStyle">
+							<div class="w-header">
+								<img src="/img/menu/menu-cap.png" alt="Область содержания">
+								<span class="fg1">Область содержания</span>
+								<button class="oi oi-x" @onclick="MenuAreaToggle"></button>
+							</div>
+							<div class="w-content">
+								<div class="mn-col1">
+									<div class="mn-p">
+										<div class="mn-p-hdr">
+											<img src="./img/menu/816.png" height="24" width="24" alt="Группа меню">
+											<span>Основное</span>
+										</div>
+										<div class="mn-p-content">
+											<div class="mn-item">
+												<div class="mn-img">
+													<img src="./img/menu/minus.png" width="16" alt="Menu group">
+												</div>
+												<a href="#">Справочник номенклатуры</a>
+											</div>
+										</div>
+									</div>
+									<div class="mn-p">
+										<div class="mn-p-hdr"></div>
+										<div class="mn-p-content"></div>
+									</div>
+								</div>
+								<div class="mn-col2">
+									<div class="mn-p">
+										<div class="mn-p-hdr"></div>
+										<div class="mn-p-content"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						@Body
+					</div>
+				</main>
+				<footer>
+					<span class="ft-span fg1"></span>
+					<span class="ft-span push" style="min-width: 54px;"></span>
+					<span class="ft-span">@DaxState.CurrencyCode</span>
+					<span class="ft-span">@DaxState.AreaId</span>
+					<span class="ft-span">usr</span>
+					<span class="ft-span">@DaxState.UserCode</span>
+					<span class="ft-span" style="position: relative;">
+						<img class="ft-icons" src="img/rr_off.png" />
+						<img class="ft-corn" src="img/ft-corn.png" />
+					</span>
+				</footer>
+			</div>
+		</CascadingValue>
+	</Authorized>
+</AuthorizeView>

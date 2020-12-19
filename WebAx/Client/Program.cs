@@ -7,6 +7,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WebAx.Client.Areas.Account;
+using WebAx.Client.Areas.Axapta;
 
 namespace WebAx.Client
 {
@@ -22,11 +23,11 @@ namespace WebAx.Client
 			_ = builder.Services.AddBlazoredLocalStorage();
 			_ = builder.Services.AddBlazoredSessionStorage();
 
-			// _ = builder.Services.AddScoped<DaxState>();
+			_ = builder.Services.AddScoped<DaxState>();
 
 			_ = builder.Services.AddAuthorizationCore();
 			_ = builder.Services.AddScoped<AuthenticationStateProvider, AuthNStateProvider>();
-			// _ = builder.Services.AddScoped<IAuthNService, AuthNService>();
+			_ = builder.Services.AddScoped<IAuthNService, AuthNService>();
 
 			WebAssemblyHost host = builder.Build();
 			await host.RunAsync();

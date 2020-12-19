@@ -24,6 +24,9 @@ a, .btn-link {
 .validation-message {
 	color: red; }
 
+.layout {
+	color: black; }
+
 #blazor-error-ui {
 	background: lightyellow;
 	bottom: 0;
