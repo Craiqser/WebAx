@@ -11,14 +11,14 @@
 				<div class="form-group">
 					<label for="username">User.Auth.Login</label>
 					<div class="input-group mb-3">
-						<InputText id="username" class="form-control" @bind-Value="RegisterModel.UserName" />
+						<InputText id="username" class="form-control" @bind-Value="RegisterModel.Login" />
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="oi oi-person"></span>
 							</div>
 						</div>
 					</div>
-					<ValidationMessage For="@(() => RegisterModel.UserName)" />
+					<ValidationMessage For="@(() => RegisterModel.Login)" />
 					<label for="email">User.Auth.EmailAddress</label>
 					<div class="input-group mb-3">
 						<InputText id="email" class="form-control" @bind-Value="RegisterModel.Email" />

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CraB.Web.Auth.Client;
+using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
 namespace WebAx.Client.Areas.Account.Logout

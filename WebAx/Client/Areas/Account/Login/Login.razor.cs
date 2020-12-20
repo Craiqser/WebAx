@@ -1,9 +1,8 @@
 ﻿using Blazored.SessionStorage;
-using CraB.Core;
-using CraB.Web;
+using CraB.Web.Auth;
+using CraB.Web.Auth.Client;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using WebAx.Areas.Account;
 
 namespace WebAx.Client.Areas.Account.Login
 {
@@ -14,23 +13,23 @@ namespace WebAx.Client.Areas.Account.Login
 		[Inject] private ISessionStorageService SessionStorage { get; set; }
 
 		protected string Error { get; set; }
-		protected LoginRequestModel LoginModel { get; set; } = new LoginRequestModel();
+		protected LoginRequest LoginRequest { get; set; } = new LoginRequest();
 
 		protected async Task HandleLoginAsync()
 		{
 			Error = string.Empty;
-			LoginResponseModel loginResponseModel = (LoginResponseModel)await AuthNService.Login(LoginModel).ConfigureAwait(true);
+			LoginResponse loginResponse = await AuthNService.Login(LoginRequest);
 
-			if (loginResponseModel.ErrorKey.Length == 0)
+			if (loginResponse.Successful)
 			{
-				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, loginResponseModel.ErrorKey);
-				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, CultureHelper.LangId(loginResponseModel.TokenAccess));
-				await SessionStorage.SetItemAsync(SessionKeys.UserDataKey, loginResponseModel.UserData.ToString());
+				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, loginResponse.ErrorKey);
+				// await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, CultureHelper.LangId(loginResponse.UserPayload.TokenAccess));
+				// await SessionStorage.SetItemAsync(SessionKeys.UserDataKey, loginResponse.UserPayload.ToString());
 				NavigationManager.NavigateTo("/Account");
 			}
 			else
 			{
-				Error = loginResponseModel.ErrorKey;
+				Error = loginResponse.ErrorKey;
 			}
 		}
 	}

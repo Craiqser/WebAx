@@ -3,7 +3,7 @@ using Dapper.Contrib.Extensions;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebAx.Server.Areas.Account
+namespace WebAx.Areas.Account
 {
 	/// <summary>Класс пользователя приложения.</summary>
 	[Table("Users")]

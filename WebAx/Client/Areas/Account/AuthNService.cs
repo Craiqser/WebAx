@@ -1,6 +1,7 @@
 ﻿using Blazored.SessionStorage;
-using CraB.Core;
 using CraB.Web;
+using CraB.Web.Auth;
+using CraB.Web.Auth.Client;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http;
@@ -22,19 +23,19 @@ namespace WebAx.Client.Areas.Account
 			_sessionStorage = sessionStorage;
 		}
 
-		public async Task<RegisterResponseModel> Register(RegisterRequestModel registerRequestModel)
+		public async Task<RegisterResponse> Register(RegisterRequest registerRequestModel)
 		{
-			return await _httpClient.PostJsonAsync<RegisterResponseModel>(ApiAccount.Register, registerRequestModel).ConfigureAwait(false);
+			return await _httpClient.PostJsonAsync<RegisterResponse>(ApiAccount.Register, registerRequestModel);
 		}
 
-		public async Task<ILoginResponseModel> Login(LoginRequestModel loginRequestModel)
+		public async Task<LoginResponse> Login(LoginRequest loginRequest)
 		{
-			ILoginResponseModel result = await _httpClient.PostJsonAsync<LoginResponseModel>(ApiAccount.Login, loginRequestModel).ConfigureAwait(false);
+			LoginResponse result = await _httpClient.PostJsonAsync<LoginResponse>(ApiAccount.Login, loginRequest);
 
 			if (result is object && result.Successful)
 			{
-				await _sessionStorage.SetItemAsync(JwtSettings.AuthTokenKeyName, result.Token).ConfigureAwait(false);
-				_authNStateProvider.MarkUserAsAuthenticated(result.Token);
+				await _sessionStorage.SetItemAsync(JwtSettings.AuthTokenKeyName, result.UserTokens.TokenAccess);
+				_authNStateProvider.MarkUserAsAuthenticated(result.UserTokens.TokenAccess);
 			}
 
 			return result;
@@ -42,7 +43,7 @@ namespace WebAx.Client.Areas.Account
 
 		public async Task Logout()
 		{
-			await _sessionStorage.RemoveItemAsync(JwtSettings.AuthTokenKeyName).ConfigureAwait(false);
+			await _sessionStorage.RemoveItemAsync(JwtSettings.AuthTokenKeyName);
 			_authNStateProvider.MarkUserAsLoggedOut();
 			_httpClient.DefaultRequestHeaders.Authorization = null;
 		}

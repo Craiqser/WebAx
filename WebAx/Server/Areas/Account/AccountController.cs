@@ -1,12 +1,11 @@
 ﻿using CraB.Core;
 using CraB.Sql;
 using CraB.Web;
+using CraB.Web.Auth;
+using CraB.Web.Auth.Server;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAx.Areas.Account;
-using WebAx.Areas.Axapta;
 
 namespace WebAx.Server.Areas.Account
 {
@@ -14,14 +13,16 @@ namespace WebAx.Server.Areas.Account
 	public class AccountController : ControllerBase
 	{
 		/// <summary>Вход пользователя в систему.</summary>
-		/// <param name="loginRequestModel">Модель данных для входа пользователя в систему.</param>
-		/// <returns><see cref="LoginResponseModel" /></returns>
+		/// <param name="loginRequest">Модель данных для входа пользователя в систему.</param>
+		/// <returns><see cref="LoginResponse" /></returns>
 		[HttpPost(ApiAccount.Login)]
-		public async Task<LoginResponseModel> Login([FromBody] LoginRequestModel loginRequestModel)
+		public async Task<LoginResponse> Login([FromBody] LoginRequest loginRequest)
 		{
 			UserService<User> userService = Dependencies.Resolve<UserService<User>>();
-			LoginResponseModel loginResponseModel = await userService.LoginAsync<LoginResponseModel>(loginRequestModel).ConfigureAwait(false);
-			User user = userService.Get(loginRequestModel?.UserName);
+			LoginResponse loginResponse = await userService.LoginAsync(loginRequest);
+
+			/*
+			User user = userService.Get(loginRequest?.Login);
 			DaxSettings daxSettings = Config.Get<DaxSettings>();
 
 			// Dax.
@@ -35,44 +36,34 @@ from dbo.DATAAREA as t with(nolock)
 where (t.ISVIRTUAL = 0);";
 				return Query.Select<DataArea>(sql);
 			});
+			*/
 
-			UserData userData = new UserData
-			{
-				AreaId = user.DataAreaDefault.NullOrEmpty() ? daxSettings.UserDataAreaIdDef : user.DataAreaDefault,
-				LangId = user.LanguageId.NullOrEmpty() ? daxSettings.UserLanguageIdDef : user.LanguageId,
-				DataAreas = null,
-				SecurityKeys = null
-			};
-
-			loginResponseModel.UserData = userData;
-			return loginResponseModel;
+			return loginResponse;
 		}
 
 		/// <summary>Регистрирует пользователя в базе данных.</summary>
-		/// <param name="registerRequestModel">Модель данных для регистрации пользователя.</param>
-		/// <returns><see cref="RegisterResponseModel" /></returns>
+		/// <param name="registerRequest">Модель данных для регистрации пользователя.</param>
+		/// <returns><see cref="RegisterResponse" /></returns>
 		[HttpPost(ApiAccount.Register)]
-		public async Task<RegisterResponseModel> Register([FromBody] RegisterRequestModel registerRequestModel)
+		public async Task<RegisterResponse> Register([FromBody] RegisterRequest registerRequest)
 		{
 			UserService<User> userService = Dependencies.Resolve<UserService<User>>();
-			RegisterResponseModel registerResponseModel = await userService.RegisterAsync(registerRequestModel).ConfigureAwait(false);
+			RegisterResponse registerResponseModel = await userService.RegisterAsync(registerRequest).ConfigureAwait(false);
 
-			if ((registerRequestModel != null) && registerResponseModel.Successful)
+			if ((registerRequest != null) && registerResponseModel.Successful)
 			{
-				Tuple<string, string> pass = Generator.ComputeSHA512(registerRequestModel.Password.Trim());
+				// Tuple<string, string> pass = Generator.ComputeSHA512(registerRequest.Password.Trim());
 				DaxSettings daxSettings = Config.Get<DaxSettings>();
 
 				User user = new User
 				{
-					Login = registerRequestModel.UserName.Trim(),
-					DisplayName = registerRequestModel.UserName.Trim(),
-					Email = registerRequestModel.Email.Length > 0 ? registerRequestModel.Email.Trim() : null,
-					PasswordHash = pass.Item1,
-					PasswordSalt = pass.Item2,
-					Active = DeleteOffActive.Active,
-					Code = Generator.StringFromGuid(5),
-					DataAreaDefault = daxSettings.UserDataAreaIdDef,
-					LanguageId = daxSettings.UserLanguageIdDef
+					Login = registerRequest.Login.Trim(),
+					Name = registerRequest.Login.Trim(),
+					Email = registerRequest.Email.Length > 0 ? registerRequest.Email.Trim() : null,
+					// PasswordHash = pass.Item1,
+					// PasswordSalt = pass.Item2,
+					// Active = DeleteOffActive.Active,
+					LangId = daxSettings.UserLanguageIdDef
 				};
 
 				if (await Query.InsertAsync(user).ConfigureAwait(false) > 0)
