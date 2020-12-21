@@ -2,6 +2,7 @@
 using CraB.Core;
 using CraB.Web;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -20,17 +21,16 @@ namespace WebAx.Client.Areas.Account
 		{
 			string token = await _sessionStorage.GetItemAsync<string>(JwtSettings.UserTokenAccess);
 
-			if (token.NullOrWhiteSpace())
-			{
-				return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
-			}
-
-			return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtSettings.ParseClaimsFromJwt(token), JwtSettings.AuthType)));
+			return token.NullOrWhiteSpace()
+				? new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()))
+				: new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(
+					new List<Claim> { new Claim(ClaimsIdentity.DefaultNameClaimType, token) }, JwtSettings.AuthType)));
 		}
 
 		public void MarkUserAsAuthenticated(string token)
 		{
-			ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(JwtSettings.ParseClaimsFromJwt(token), JwtSettings.AuthType));
+			ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(
+				new List<Claim> { new Claim(ClaimsIdentity.DefaultNameClaimType, token) }, JwtSettings.AuthType));
 			Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(claimsPrincipal));
 			NotifyAuthenticationStateChanged(authState);
 		}

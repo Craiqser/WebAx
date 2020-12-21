@@ -1,4 +1,3 @@
-using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using CraB.Web.Auth.Client;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -21,9 +20,7 @@ namespace WebAx.Client
 
 			_ = builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-			_ = builder.Services.AddBlazoredLocalStorage();
 			_ = builder.Services.AddBlazoredSessionStorage();
-
 			_ = builder.Services.AddScoped<DaxState>();
 
 			_ = builder.Services.AddAuthorizationCore();

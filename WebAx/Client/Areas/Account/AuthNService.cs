@@ -30,10 +30,9 @@ namespace WebAx.Client.Areas.Account
 
 			if (result is not null && result.Successful)
 			{
-				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, result.UserTokens.TokenAccess);
-				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenAccess, result.UserTokens.TokenAccess);
-				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenRefresh, result.UserTokens.TokenRefresh);
-				_authNStateProvider.MarkUserAsAuthenticated(result.UserTokens.TokenAccess);
+				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, result.UserInfo.Token);
+				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenAccess, result.UserInfo.Token);
+				_authNStateProvider.MarkUserAsAuthenticated(result.UserInfo.Token);
 			}
 
 			return result;
@@ -42,7 +41,6 @@ namespace WebAx.Client.Areas.Account
 		public async Task Logout()
 		{
 			await _sessionStorage.RemoveItemAsync(JwtSettings.UserTokenAccess);
-			await _sessionStorage.RemoveItemAsync(JwtSettings.UserTokenRefresh);
 			_authNStateProvider.MarkUserAsLoggedOut();
 			_httpClient.DefaultRequestHeaders.Authorization = null;
 		}
@@ -50,22 +48,6 @@ namespace WebAx.Client.Areas.Account
 		public async Task<RegisterResponse> Register(RegisterRequest registerRequest)
 		{
 			return await _httpClient.PostJsonAsync<RegisterResponse>(ApiAccount.Register, registerRequest);
-		}
-
-		public async Task TokenRefresh()
-		{
-			string token = await _sessionStorage.GetItemAsync<string>(JwtSettings.UserTokenAccess);
-			string refreshToken = await _sessionStorage.GetItemAsync<string>(JwtSettings.UserTokenRefresh);
-
-			LoginResponse tokenResponse = await _httpClient.PostJsonAsync<LoginResponse>(ApiAccount.Token,
-				new LoginRequest { Login = token, Password = refreshToken });
-
-			if (tokenResponse.Successful)
-			{
-				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, tokenResponse.UserTokens.TokenAccess);
-				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenAccess, tokenResponse.UserTokens.TokenAccess);
-				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenRefresh, tokenResponse.UserTokens.TokenRefresh);
-			}
 		}
 	}
 }
