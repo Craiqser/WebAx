@@ -2,8 +2,6 @@
 using CraB.Core;
 using CraB.Web;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -11,25 +9,21 @@ namespace WebAx.Client.Areas.Account
 {
 	public class AuthNStateProvider : AuthenticationStateProvider
 	{
-		public HttpClient HttpClient { get; }
 		private readonly ISessionStorageService _sessionStorage;
 
-		public AuthNStateProvider(HttpClient httpClient, ISessionStorageService sessionStorage)
+		public AuthNStateProvider(ISessionStorageService sessionStorage)
 		{
-			HttpClient = httpClient;
 			_sessionStorage = sessionStorage;
 		}
 
 		public override async Task<AuthenticationState> GetAuthenticationStateAsync()
 		{
-			string token = await _sessionStorage.GetItemAsync<string>(JwtSettings.AuthTokenKeyName).ConfigureAwait(false);
+			string token = await _sessionStorage.GetItemAsync<string>(JwtSettings.UserTokenAccess);
 
 			if (token.NullOrWhiteSpace())
 			{
 				return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 			}
-
-			HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, token);
 
 			return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtSettings.ParseClaimsFromJwt(token), JwtSettings.AuthType)));
 		}

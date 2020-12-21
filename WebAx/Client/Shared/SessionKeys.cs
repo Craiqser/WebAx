@@ -2,7 +2,10 @@
 {
 	public static class SessionKeys
 	{
-		public const string AreaIdKey = "dac"; // DataArea current.
-		public const string UserDataKey = "uds"; // Current session user data.
+		/// <summary>Текущая компания.</summary>
+		public const string AreaIdKey = "axdac";
+
+		/// <summary>Данные пользователя.</summary>
+		public const string UserDataKey = "uds";
 	}
 }

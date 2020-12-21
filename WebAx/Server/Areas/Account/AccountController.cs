@@ -79,5 +79,16 @@ where (t.ISVIRTUAL = 0);";
 
 			return registerResponseModel;
 		}
+
+		/// <summary>Обновление токена доступа.</summary>
+		/// <param name="loginRequest">Модель данных для входа пользователя в систему, в которой теперь токены.</param>
+		/// <returns><see cref="LoginResponse" /></returns>
+		[HttpPost(ApiAccount.Token)]
+		public async Task<LoginResponse> Token([FromBody] LoginRequest loginRequest)
+		{
+			UserService<User> userService = Dependencies.Resolve<UserService<User>>();
+			LoginResponse loginResponse = await userService.TokenAsync(loginRequest);
+			return loginResponse;
+		}
 	}
 }
