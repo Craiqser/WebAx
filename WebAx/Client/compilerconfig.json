@@ -1,6 +1,10 @@
 ﻿[
-	{
-		"inputFile": "wwwroot/css/app.scss",
-		"outputFile": "wwwroot/css/app.css"
-	}
+  {
+    "outputFile": "wwwroot/css/app.css",
+    "inputFile": "wwwroot/css/app.scss"
+  },
+  {
+    "outputFile": "Areas/Account/Styles/Auth.css",
+    "inputFile": "Areas/Account/Styles/Auth.scss"
+  }
 ]

@@ -12,20 +12,18 @@ namespace WebAx.Client.Areas.Account.Login
 		[Inject] private NavigationManager NavigationManager { get; set; }
 		[Inject] private ISessionStorageService SessionStorage { get; set; }
 
-		protected string Error { get; set; }
+		protected string Error { get; set; } = "";
 		protected LoginRequest LoginRequest { get; set; } = new LoginRequest();
 
 		protected async Task HandleLoginAsync()
 		{
-			Error = string.Empty;
+			Error = "";
 			LoginResponse loginResponse = await AuthNService.Login(LoginRequest);
 
 			if (loginResponse.Successful)
 			{
-				await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, loginResponse.ErrorKey);
-				// await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, CultureHelper.LangId(loginResponse.UserPayload.TokenAccess));
-				// await SessionStorage.SetItemAsync(SessionKeys.UserDataKey, loginResponse.UserPayload.ToString());
-				NavigationManager.NavigateTo("/Account");
+				await SessionStorage.SetItemAsync(SessionKeys.UserData, loginResponse.UserInfo);
+				NavigationManager.NavigateTo("");
 			}
 			else
 			{

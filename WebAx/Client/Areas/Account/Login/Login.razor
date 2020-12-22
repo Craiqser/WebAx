@@ -1,46 +1,33 @@
 ﻿@page "/Account/Login"
 @layout EmptyLayout
 @inherits LoginPage
-<Toast Message="User.Auth.AppLogin" />
-<div class="card-wrapper" style="font-size: 14px;">
-	<div class="card border-secondary bg-light m-auto" style="width: 450px;">
-		<h5 class="card-header">User.Auth.AppLogin</h5>
-		<div class="card-body">
-			<EditForm Model="LoginRequest" OnValidSubmit="@HandleLoginAsync">
-				<DataAnnotationsValidator />
-				<div class="form-group">
-					<label for="username">User.Auth.Login</label>
-					<div class="input-group mb-3">
-						<InputText id="username" class="form-control" @bind-Value="LoginRequest.Login" />
-						<div class="input-group-append">
-							<div class="input-group-text">
-								<span class="oi oi-person"></span>
-							</div>
-						</div>
-					</div>
-					<ValidationMessage For="@(() => LoginRequest.Login)" />
-				</div>
-				<div class="form-group">
-					<label for="password">User.Auth.Password</label>
-					<div class="input-group mb-3">
-						<InputText id="password" type="password" class="form-control" @bind-Value="LoginRequest.Password" />
-						<div class="input-group-append">
-							<div class="input-group-text">
-								<span class="oi oi-key"></span>
-							</div>
-						</div>
-					</div>
-					<ValidationMessage For="@(() => LoginRequest.Password)" />
-				</div>
-				<div class="input-group-append">
-					<button type="submit" class="btn btn-primary">User.Auth.SignIn</button>
-					<NavLink class="nav-link" href="/Account/Register">User.Auth.Register</NavLink>
-				</div>
-			</EditForm>
+<div class="segment"><h1>User.Auth.SignIn</h1></div>
+<EditForm Model="LoginRequest" OnValidSubmit="@HandleLoginAsync">
+	<DataAnnotationsValidator />
+
+	<ValidationMessage For="@(() => LoginRequest.Login)" />
+	<label>
+		<InputText type="text" placeholder="Login" @bind-Value="LoginRequest.Login" />
+	</label>
+
+	<ValidationMessage For="@(() => LoginRequest.Password)" />
+	<label>
+		<InputText type="password" placeholder="Password" @bind-Value="LoginRequest.Password" />
+	</label>
+
+	<button type="submit" class="signin">
+		<div>
+			<svg width="20" height="20" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+				<path fill="#777" d="M448 88v336a23.94 23.94 0 0 1-24 24h-16a23.94 23.94 0 0 1-24-24V88a23.94 23.94 0 0 1 24-24h16a23.94 23.94 0 0 1 24 24z"></path>
+				<path fill="#999" d="M0 296.11V216a24 24 0 0 1 24-24h136v-88c0-17.82 21.51-26.73 34.11-14.12l152.26 152.45a19.4 19.4 0 0 1 0 27.34L194.14 422.09C181.54 434.7 160 425.79 160 408v-87.86H24a24 24 0 0 1-24-24.03z"></path>
+			</svg>
+			<span>&nbsp;User.Auth.SignIn</span>
 		</div>
-		@if (Error != null && Error.Length > 0)
-		{
-			<div class="alert alert-danger mx-auto" role="alert">@Error</div>
-		}
-	</div>
-</div>
+	</button>
+
+	<NavLink class="nav-link" href="/Account/Register">User.Auth.Register</NavLink>
+</EditForm>
+@if (Error.Length > 0)
+{
+	<div class="segment" role="alert">@Error</div>
+}

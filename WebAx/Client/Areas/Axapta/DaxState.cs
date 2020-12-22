@@ -48,7 +48,7 @@ namespace WebAx.Client.Areas.Axapta
 
 					if (DataArea != null)
 					{
-						SyncSessionStorage.SetItem(SessionKeys.AreaIdKey, DataArea.Id);
+						SyncSessionStorage.SetItem(SessionKeys.Ax.AreaId, DataArea.Id);
 						LangId = DataArea.LanguageId;
 
 						if (Module == null)
@@ -74,7 +74,7 @@ namespace WebAx.Client.Areas.Axapta
 				if (_langId != (value ?? string.Empty))
 				{
 					_langId = value;
-					SyncSessionStorage.SetItem(SessionKeys.UserDataKey, _langId);
+					SyncSessionStorage.SetItem(SessionKeys.UserData, _langId);
 				}
 			}
 		}
@@ -113,7 +113,7 @@ namespace WebAx.Client.Areas.Axapta
 
 				if (DataArea != null)
 				{
-					await SessionStorage.SetItemAsync(SessionKeys.AreaIdKey, DataArea.Id);
+					await SessionStorage.SetItemAsync(SessionKeys.Ax.AreaId, DataArea.Id);
 					LangId = DataArea.LanguageId;
 				}
 			}
@@ -121,8 +121,8 @@ namespace WebAx.Client.Areas.Axapta
 
 		public async Task LoadAsync()
 		{
-			DataAreas = await SessionStorage.GetItemAsync<IEnumerable<DataArea>>(SessionKeys.UserDataKey);
-			string areaId = await SessionStorage.GetItemAsync<string>(SessionKeys.AreaIdKey);
+			// DataAreas = await SessionStorage.GetItemAsync<IEnumerable<DataArea>>(SessionKeys.UserData);
+			string areaId = await SessionStorage.GetItemAsync<string>(SessionKeys.Ax.AreaId);
 
 			if ((areaId != null) && (DataAreas != null))
 			{
@@ -134,8 +134,8 @@ namespace WebAx.Client.Areas.Axapta
 				}
 			}
 
-			_langId = await SessionStorage.GetItemAsync<string>(SessionKeys.UserDataKey);
-			UserCode = await SessionStorage.GetItemAsync<string>(SessionKeys.UserDataKey);
+			_langId = await SessionStorage.GetItemAsync<string>(SessionKeys.UserData);
+			UserCode = await SessionStorage.GetItemAsync<string>(SessionKeys.UserData);
 		}
 	}
 }
