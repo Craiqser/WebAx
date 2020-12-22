@@ -1,7 +1,9 @@
 ﻿body {
 	background-color: #EBECF0;
-	font-size: 16px;
-}
+	font-family: "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif; }
+
+body, p, input, select, textarea, button {
+	font-size: 16px; }
 
 h1 {
 	font-size: 32px; }

@@ -1,19 +1,15 @@
 ﻿@page "/Account/Login"
-@layout EmptyLayout
+@layout AuthLayout
 @inherits LoginPage
 <div class="segment"><h1>User.Auth.SignIn</h1></div>
-<EditForm Model="LoginRequest" OnValidSubmit="@HandleLoginAsync">
+<EditForm Model="@LoginRequest" OnValidSubmit="@HandleLoginAsync">
 	<DataAnnotationsValidator />
 
 	<ValidationMessage For="@(() => LoginRequest.Login)" />
-	<label>
-		<InputText type="text" placeholder="Login" @bind-Value="LoginRequest.Login" />
-	</label>
+	<label><InputText type="text" placeholder="Login" @bind-Value="LoginRequest.Login" /></label>
 
 	<ValidationMessage For="@(() => LoginRequest.Password)" />
-	<label>
-		<InputText type="password" placeholder="Password" @bind-Value="LoginRequest.Password" />
-	</label>
+	<label><InputText type="password" placeholder="Password" @bind-Value="LoginRequest.Password" /></label>
 
 	<button type="submit" class="signin">
 		<div>
@@ -25,7 +21,7 @@
 		</div>
 	</button>
 
-	<NavLink class="nav-link" href="/Account/Register">User.Auth.Register</NavLink>
+	<label>User.AccountNo<NavLink class="link" href="/Account/Register">User.Auth.Register</NavLink></label>
 </EditForm>
 @if (Error.Length > 0)
 {

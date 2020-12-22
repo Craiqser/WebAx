@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebAx.Client.Areas.Axapta;
 
-namespace WebAx.Client.Shared
+namespace WebAx.Client.Layouts
 {
 	public class BaseLayoutPage : LayoutComponentBase
 	{
