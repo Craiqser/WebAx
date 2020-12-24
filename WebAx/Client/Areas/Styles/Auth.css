@@ -1,12 +1,16 @@
 ﻿body {
+	height: 100vh;
+	margin: 0;
+	position: relative;
 	background-color: #EBECF0;
-	font-family: "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif; }
+	font-family: "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+	font-weight: 600; }
 
 body, p, input, select, textarea, button {
 	font-size: 16px; }
 
 h1 {
-	font-size: 32px; }
+	font-size: 24px; }
 
 form {
 	padding: 32px;
@@ -18,16 +22,16 @@ div, p {
 	text-shadow: 1px 1px 1px #FFF; }
 
 .segment {
-	padding: 32px 0;
+	padding: 32px 0 0 16px;
 	text-align: center; }
 
 button, input {
+	padding: 16px;
 	border: 0;
 	outline: 0;
 	font-size: 16px;
-	border-radius: 320px;
-	padding: 16px;
 	background-color: #EBECF0;
+	border-radius: 32px;
 	text-shadow: 1px 1px 0 #FFF; }
 
 button {
@@ -35,26 +39,11 @@ button {
 	color: #61677C;
 	font-weight: bold;
 	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
-	transition: all 0.2s ease-in-out;
-	font-weight: 600; }
-	button .icon {
-		margin-right: 8px; }
+	transition: all 0.2s ease-in-out; }
 	button:hover {
 		box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC; }
 	button:active {
 		box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF; }
-	button.unit {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		width: 48px;
-		height: 48px;
-		margin: 0 8px;
-		border-radius: 8px;
-		line-height: 0;
-		font-size: 19.2px; }
-		button.unit .icon {
-			margin-right: 0; }
 	button.signin {
 		display: block;
 		width: 100%; }
@@ -62,7 +51,7 @@ button {
 			display: flex;
 			align-items: center;
 			justify-content: flex-start;
-			color: #a00000; }
+			color: #A00000; }
 			button.signin div span {
 				flex-grow: 1;
 				padding-right: 16px; }
@@ -78,7 +67,36 @@ input {
 	width: 100%;
 	box-sizing: border-box;
 	transition: all 0.2s ease-in-out;
-	appearance: none;
 	-webkit-appearance: none; }
 	input:focus {
 		box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF; }
+
+.block_center {
+	position: absolute;
+	bottom: 0;
+	height: 420px;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 400px;
+	margin: auto;
+	background-color: #EEE;
+	border-radius: 32px;
+	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC; }
+
+.invalid {
+	border: 2px solid darkred; }
+
+.link {
+	color: dodgerblue; }
+
+.plink {
+	margin-top: 50px;
+	font-size: 12px;
+	text-align: center; }
+
+.valid.modified:not([type=checkbox]) {
+	border: 2px groove dodgerblue; }
+
+.validation-message {
+	color: darkred; }

@@ -11,20 +11,20 @@ namespace WebAx.Client.Areas.Account.Register
 		[Inject] private NavigationManager NavigationManager { get; set; }
 
 		protected string Error { get; set; }
-		protected RegisterRequest RegisterModel { get; set; } = new RegisterRequest();
+		protected RegisterRequest RegisterRequest { get; set; } = new RegisterRequest();
 
-		protected async Task HandleRegistrationAsync()
+		protected async Task HandleRegisterAsync()
 		{
-			Error = string.Empty;
-			RegisterResponse result = await AuthNService.Register(RegisterModel);
+			Error = "";
+			RegisterResponse registerResponse = await AuthNService.Register(RegisterRequest);
 
-			if (result.Successful)
+			if (registerResponse.Successful)
 			{
 				NavigationManager.NavigateTo("Account/Login");
 			}
 			else
 			{
-				Error = result.Error;
+				Error = registerResponse.Error;
 			}
 		}
 	}

@@ -6,5 +6,9 @@
   {
     "outputFile": "Areas/Account/Styles/Auth.css",
     "inputFile": "Areas/Account/Styles/Auth.scss"
+  },
+  {
+    "outputFile": "Areas/Styles/Auth.css",
+    "inputFile": "Areas/Styles/Auth.scss"
   }
 ]
