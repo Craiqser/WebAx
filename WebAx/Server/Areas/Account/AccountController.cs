@@ -48,36 +48,7 @@ where (t.ISVIRTUAL = 0);";
 		public async Task<RegisterResponse> Register([FromBody] RegisterRequest registerRequest)
 		{
 			UserService<User> userService = Dependencies.Resolve<UserService<User>>();
-			RegisterResponse registerResponseModel = await userService.RegisterAsync(registerRequest).ConfigureAwait(false);
-
-			if ((registerRequest != null) && registerResponseModel.Successful)
-			{
-				// Tuple<string, string> pass = Generator.ComputeSHA512(registerRequest.Password.Trim());
-				DaxSettings daxSettings = Config.Get<DaxSettings>();
-
-				User user = new User
-				{
-					Login = registerRequest.Login.Trim(),
-					Name = registerRequest.Login.Trim(),
-					Email = registerRequest.Email.Length > 0 ? registerRequest.Email.Trim() : null,
-					// PasswordHash = pass.Item1,
-					// PasswordSalt = pass.Item2,
-					// Active = DeleteOffActive.Active,
-					LangId = daxSettings.UserLanguageIdDef
-				};
-
-				if (await Query.InsertAsync(user).ConfigureAwait(false) > 0)
-				{
-					return registerResponseModel;
-				}
-				else
-				{
-					registerResponseModel.Successful = false;
-					registerResponseModel.Error = "User.Auth.RegistrationError";
-				}
-			}
-
-			return registerResponseModel;
+			return await userService.RegisterAsync(registerRequest);
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace WebAx.Client.Areas.Account.Register
 		[Inject] private IAuthNService AuthNService { get; set; }
 		[Inject] private NavigationManager NavigationManager { get; set; }
 
-		protected string Error { get; set; }
+		protected string Error { get; set; } = "";
 		protected RegisterRequest RegisterRequest { get; set; } = new RegisterRequest();
 
 		protected async Task HandleRegisterAsync()
@@ -24,7 +24,7 @@ namespace WebAx.Client.Areas.Account.Register
 			}
 			else
 			{
-				Error = registerResponse.Error;
+				Error = registerResponse.ErrorKey;
 			}
 		}
 	}
