@@ -1,4 +1,5 @@
-﻿using CraB.Web.Auth;
+﻿using CraB.Core;
+using CraB.Web.Auth;
 using Dapper.Contrib.Extensions;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ namespace WebAx.Areas.Account
 {
 	/// <summary>Класс пользователя приложения.</summary>
 	[Table("Users")]
-	public class User : IUser
+	public class UserRecord : IUser
 	{
 		[Required, DisplayName("Id"), Dapper.Contrib.Extensions.Key]
 		public int Id { get; init; }
@@ -22,11 +23,17 @@ namespace WebAx.Areas.Account
 		[DataType(DataType.EmailAddress), MaxLength(80)]
 		public string Email { get; init; }
 
+		public string PasswordHash { get; init; }
+		public string PasswordSalt { get; init; }
+
 		[DisplayName("User Image"), MaxLength(100)]
 		public string UserImage { get; init; }
 
 		[DisplayName("Language")]
 		[MinLength(2), MaxLength(7), DefaultValue("ru")]
 		public string LangId { get; init; }
+
+		[Required, DisplayName("Active"), DefaultValue(1)]
+		public DeleteOffActive Active { get; init; }
 	}
 }

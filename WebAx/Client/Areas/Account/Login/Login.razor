@@ -9,12 +9,8 @@
 	}
 	<EditForm Model="@LoginRequest" OnValidSubmit="@HandleLoginAsync">
 		<DataAnnotationsValidator />
-		<ValidationMessage For="@(() => LoginRequest.Login)" />
 		<label><InputText type="text" placeholder="Login" @bind-Value="LoginRequest.Login" /></label>
-
-		<ValidationMessage For="@(() => LoginRequest.Password)" />
 		<label><InputText type="password" placeholder="Password" @bind-Value="LoginRequest.Password" /></label>
-
 		<button type="submit" class="signin">
 			<div>
 				<svg width="20" height="20" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

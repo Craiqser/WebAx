@@ -48,7 +48,31 @@ where (t.ISVIRTUAL = 0);";
 		public async Task<RegisterResponse> Register([FromBody] RegisterRequest registerRequest)
 		{
 			UserService<User> userService = Dependencies.Resolve<UserService<User>>();
-			return await userService.RegisterAsync(registerRequest);
+			RegisterResponse registerResponse = await userService.RegisterAsync(registerRequest);
+
+			if (registerResponse.Successful)
+			{
+				(string hash, string salt) = Generator.ComputeSHA512(registerRequest.Password.Trim());
+
+				UserRecord user = new UserRecord
+				{
+					Login = registerRequest.Login.Trim(),
+					Name = registerRequest.Login.Trim(),
+					Email = registerRequest.Email.Length > 0 ? registerRequest.Email.Trim() : null,
+					PasswordHash = hash,
+					PasswordSalt = salt,
+					UserImage = null,
+					LangId = registerRequest.LangId,
+					Active = DeleteOffActive.Active
+				};
+
+				return await Query.InsertAsync(user) > 0
+					? registerResponse
+					: new RegisterResponse { ErrorKey = "Server.Error" };
+
+			}
+
+			return registerResponse;
 		}
 	}
 }

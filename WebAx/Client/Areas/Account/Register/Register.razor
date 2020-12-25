@@ -1,7 +1,7 @@
 ﻿@page "/Account/Register"
 @layout AuthLayout
 @inherits RegisterPage
-<div class="block_center">
+<div class="block_center" style="height: 570px">
 	<div class="segment"><h1>User.Auth.Register</h1></div>
 	@if (Error.Length > 0)
 	{
@@ -9,18 +9,10 @@
 	}
 	<EditForm Model="@RegisterRequest" OnValidSubmit="@HandleRegisterAsync">
 		<DataAnnotationsValidator />
-		<ValidationMessage For="@(() => RegisterRequest.Login)" />
 		<label><InputText type="text" placeholder="Login" @bind-Value="RegisterRequest.Login" /></label>
-
-		<ValidationMessage For="@(() => RegisterRequest.Email)" />
 		<label><InputText type="text" placeholder="Email" @bind-Value="RegisterRequest.Email" /></label>
-
-		<ValidationMessage For="@(() => RegisterRequest.Password)" />
 		<label><InputText type="password" placeholder="Password" @bind-Value="RegisterRequest.Password" /></label>
-
-		<ValidationMessage For="@(() => RegisterRequest.PasswordConfirm)" />
 		<label><InputText type="password" placeholder="Confirm password" @bind-Value="RegisterRequest.PasswordConfirm" /></label>
-
 		<button type="submit" class="signin">
 			<div>
 				<svg width="20" height="20" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -30,6 +22,6 @@
 				<span>&nbsp;User.Auth.Register</span>
 			</div>
 		</button>
-		<p class="plink">User.AccountNo&nbsp;<NavLink class="link" href="/Account/Register">User.Auth.Register</NavLink></p>
+		<p class="plink">User.AccountAlready&nbsp;<NavLink class="link" href="/Account/Login">User.Auth.Login</NavLink></p>
 	</EditForm>
 </div>
