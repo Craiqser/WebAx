@@ -62,7 +62,7 @@ where (t.ISVIRTUAL = 0);";
 					PasswordHash = hash,
 					PasswordSalt = salt,
 					UserImage = null,
-					LangId = registerRequest.LangId,
+					LangId = registerRequest.LangId ?? "en-US",
 					Active = DeleteOffActive.Active
 				};
 
