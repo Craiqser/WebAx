@@ -11,7 +11,7 @@ namespace WebAx.Client.Areas.Axapta
 	{
 		private ISessionStorageService SessionStorage { get; }
 		private ISyncSessionStorageService SyncSessionStorage { get; }
-		private string _langId = string.Empty;
+		private string _langId = "";
 
 		public DaxState(ISessionStorageService sessionStorage, ISyncSessionStorageService syncSessionStorage)
 		{
@@ -39,7 +39,7 @@ namespace WebAx.Client.Areas.Axapta
 
 		public string AreaId
 		{
-			get => DataArea?.Id ?? string.Empty;
+			get => DataArea?.Id ?? "";
 			set
 			{
 				if ((DataArea == null) || (DataArea.Id != value))
@@ -60,7 +60,7 @@ namespace WebAx.Client.Areas.Axapta
 			}
 		}
 
-		public string CurrencyCode => DataArea?.CurrencyCode ?? string.Empty;
+		public string CurrencyCode => DataArea?.CurrencyCode ?? "";
 
 		public DataArea DataArea { get; private set; }
 		public IEnumerable<DataArea> DataAreas { get; private set; }
@@ -71,7 +71,7 @@ namespace WebAx.Client.Areas.Axapta
 
 			set
 			{
-				if (_langId != (value ?? string.Empty))
+				if (_langId != (value ?? ""))
 				{
 					_langId = value;
 					SyncSessionStorage.SetItem(SessionKeys.UserData, _langId);
@@ -83,7 +83,7 @@ namespace WebAx.Client.Areas.Axapta
 
 		public string ModuleId
 		{
-			get => Module?.Id ?? string.Empty;
+			get => Module?.Id ?? "";
 			set
 			{
 				if ((Module == null) || (Module.Id != value))
@@ -98,12 +98,12 @@ namespace WebAx.Client.Areas.Axapta
 			}
 		}
 
-		public string ModuleLabel => Module?.Label ?? string.Empty;
-		public string ModuleLabelArea => (Module?.Label == null) ? string.Empty : $"{Module.Label} Область";
+		public string ModuleLabel => Module?.Label ?? "";
+		public string ModuleLabelArea => (Module?.Label == null) ? "" : $"{Module.Label} Область";
 
 		public IEnumerable<DaxModule> Modules { get; private set; }
 
-		public string UserCode { get; private set; } = string.Empty;
+		public string UserCode { get; private set; } = "";
 
 		public async Task CompanyChange(string areaId)
 		{

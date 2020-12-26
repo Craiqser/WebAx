@@ -1,4 +1,5 @@
 ﻿using Blazored.SessionStorage;
+using CraB.Core;
 using CraB.Web.Auth;
 using CraB.Web.Auth.Client;
 using Microsoft.AspNetCore.Components;
@@ -29,6 +30,11 @@ namespace WebAx.Client.Areas.Account.Login
 			{
 				Error = loginResponse.ErrorKey;
 			}
+		}
+
+		protected static string LG(string key)
+		{
+			return L.Get(key);
 		}
 	}
 }

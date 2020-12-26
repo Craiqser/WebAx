@@ -2,15 +2,15 @@
 @layout AuthLayout
 @inherits LoginPage
 <div class="block_center">
-	<div class="segment"><h1>User.Auth.SignIn</h1></div>
+	<div class="segment"><h1>@LG("Auth.SignIn")</h1></div>
 	@if (Error.Length > 0)
 	{
 		<div class="validation-message" role="alert">@Error</div>
 	}
 	<EditForm Model="@LoginRequest" OnValidSubmit="@HandleLoginAsync">
 		<DataAnnotationsValidator />
-		<label><InputText type="text" placeholder="Login" @bind-Value="LoginRequest.Login" /></label>
-		<label><InputText type="password" placeholder="Password" @bind-Value="LoginRequest.Password" /></label>
+		<label><InputText type="text" placeholder="@LG("Auth.Login")" @bind-Value="LoginRequest.Login" /></label>
+		<label><InputText type="password" placeholder="@LG("Auth.Password")" @bind-Value="LoginRequest.Password" /></label>
 		<button type="submit" class="signin">
 			<div>
 				<svg width="20" height="20" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
