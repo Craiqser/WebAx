@@ -1,4 +1,5 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using CraB.Core;
 using CraB.Web.Auth;
 using CraB.Web.Auth.Client;
@@ -11,6 +12,7 @@ namespace WebAx.Client.Areas.Account.Login
 	{
 		[Inject] private IAuthNService AuthNService { get; set; }
 		[Inject] private NavigationManager NavigationManager { get; set; }
+		[Inject] private ILocalStorageService LocalStorage { get; set; }
 		[Inject] private ISessionStorageService SessionStorage { get; set; }
 
 		protected string Error { get; set; } = "";
@@ -23,8 +25,9 @@ namespace WebAx.Client.Areas.Account.Login
 
 			if (loginResponse.Successful)
 			{
+				await LocalStorage.SetItemAsync(SessionKeys.LangId, loginResponse.UserInfo.LangId);
 				await SessionStorage.SetItemAsync(SessionKeys.UserData, loginResponse.UserInfo);
-				NavigationManager.NavigateTo("");
+				NavigationManager.NavigateTo("/");
 			}
 			else
 			{

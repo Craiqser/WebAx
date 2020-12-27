@@ -7,6 +7,7 @@ namespace WebAx.Client.Areas.Account
 	{
 		public const string AccountHave = "Есть аккаунт?";
 		public const string AccountNo = "Нет аккаунта?";
+		public const string CredentialsCheck = "Аутентификация...";
 		public const string Email = "E-mail";
 		public const string Login = "Логин";
 		public const string Password = "Пароль";
@@ -22,6 +23,7 @@ namespace WebAx.Client.Areas.Account
 	{
 		public const string AccountHave = "Have an account?";
 		public const string AccountNo = "No account?";
+		public const string CredentialsCheck = "Authentication...";
 		public const string Login = "Login";
 		public const string Password = "Password";
 		public const string PasswordConfirm = "Password confirmation";

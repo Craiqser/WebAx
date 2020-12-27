@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using CraB.Core;
 using CraB.Web.Auth.Client;
@@ -22,6 +23,7 @@ namespace WebAx.Client
 
 			_ = builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+			_ = builder.Services.AddBlazoredLocalStorage(); // Подключает библиотеку для работы с локальным хранилищем.
 			_ = builder.Services.AddBlazoredSessionStorage(); // Подключает библиотеку для работы с хранилищем сессии.
 			_ = builder.Services.AddSingleton<ILocalizationService, LocalizationService>(); // Сервис локализации.
 			_ = builder.Services.AddScoped<DaxState>();

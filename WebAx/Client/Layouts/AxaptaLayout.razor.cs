@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using CraB.Core;
+using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using WebAx.Client.Areas.Axapta;
 
@@ -15,6 +16,11 @@ namespace WebAx.Client.Layouts
 		protected void AreaIdUpdated(string areaId)
 		{
 			DaxState.AreaId = areaId;
+		}
+
+		protected static string LG(string key)
+		{
+			return L.Get(key);
 		}
 
 		protected void MenuAreaToggle()

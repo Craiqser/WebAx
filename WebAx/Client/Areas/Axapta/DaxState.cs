@@ -124,6 +124,7 @@ namespace WebAx.Client.Areas.Axapta
 			// DataAreas = await SessionStorage.GetItemAsync<IEnumerable<DataArea>>(SessionKeys.UserData);
 			string areaId = await SessionStorage.GetItemAsync<string>(SessionKeys.Ax.AreaId);
 
+			/*
 			if ((areaId != null) && (DataAreas != null))
 			{
 				DataArea = DataAreas?.Where(da => da.Id == areaId).FirstOrDefault();
@@ -136,6 +137,7 @@ namespace WebAx.Client.Areas.Axapta
 
 			_langId = await SessionStorage.GetItemAsync<string>(SessionKeys.UserData);
 			UserCode = await SessionStorage.GetItemAsync<string>(SessionKeys.UserData);
+			*/
 		}
 	}
 }

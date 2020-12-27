@@ -69,7 +69,6 @@ where (t.ISVIRTUAL = 0);";
 				return await Query.InsertAsync(user) > 0
 					? registerResponse
 					: new RegisterResponse { ErrorKey = "Server.Error" };
-
 			}
 
 			return registerResponse;

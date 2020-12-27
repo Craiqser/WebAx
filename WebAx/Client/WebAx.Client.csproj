@@ -34,6 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
 		<PackageReference Include="Blazored.SessionStorage" Version="1.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.1" />
