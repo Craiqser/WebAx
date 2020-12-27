@@ -3,6 +3,7 @@ using Blazored.SessionStorage;
 using CraB.Core;
 using CraB.Web.Auth;
 using CraB.Web.Auth.Client;
+using CraB.Web.Helpers;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
@@ -12,8 +13,6 @@ namespace WebAx.Client.Areas.Account.Login
 	{
 		[Inject] private IAuthNService AuthNService { get; set; }
 		[Inject] private NavigationManager NavigationManager { get; set; }
-		[Inject] private ILocalStorageService LocalStorage { get; set; }
-		[Inject] private ISessionStorageService SessionStorage { get; set; }
 
 		protected string Error { get; set; } = "";
 		protected LoginRequest LoginRequest { get; set; } = new LoginRequest();
@@ -25,9 +24,7 @@ namespace WebAx.Client.Areas.Account.Login
 
 			if (loginResponse.Successful)
 			{
-				await LocalStorage.SetItemAsync(SessionKeys.LangId, loginResponse.UserInfo.LangId);
-				await SessionStorage.SetItemAsync(SessionKeys.UserData, loginResponse.UserInfo);
-				NavigationManager.NavigateTo("/");
+				NavigationManager.NavigateTo(NavigationManager.QueryString("returnUrl") ?? "/");
 			}
 			else
 			{

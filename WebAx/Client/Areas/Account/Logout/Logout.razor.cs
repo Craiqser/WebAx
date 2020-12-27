@@ -12,7 +12,7 @@ namespace WebAx.Client.Areas.Account.Logout
 		protected override async Task OnInitializedAsync()
 		{
 			await AuthNService.Logout();
-			NavigationManager.NavigateTo("");
+			NavigationManager.NavigateTo("/Account/Login");
 		}
 	}
 }

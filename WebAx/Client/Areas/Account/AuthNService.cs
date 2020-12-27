@@ -1,4 +1,5 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using CraB.Web;
 using CraB.Web.Auth;
 using CraB.Web.Auth.Client;
@@ -15,12 +16,15 @@ namespace WebAx.Client.Areas.Account
 	{
 		private readonly HttpClient _httpClient;
 		private readonly AuthNStateProvider _authNStateProvider;
+		private readonly ILocalStorageService _localStorage;
 		private readonly ISessionStorageService _sessionStorage;
 
-		public AuthNService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, ISessionStorageService sessionStorage)
+		public AuthNService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider,
+			ILocalStorageService localStorage, ISessionStorageService sessionStorage)
 		{
 			_httpClient = httpClient;
 			_authNStateProvider = (AuthNStateProvider)authenticationStateProvider;
+			_localStorage = localStorage;
 			_sessionStorage = sessionStorage;
 		}
 
@@ -30,8 +34,11 @@ namespace WebAx.Client.Areas.Account
 
 			if (result is not null && result.Successful)
 			{
-				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, result.UserInfo.Token);
+				await _localStorage.SetItemAsync(SessionKeys.LangId, result.UserInfo.LangId);
 				await _sessionStorage.SetItemAsync(JwtSettings.UserTokenAccess, result.UserInfo.Token);
+				await _sessionStorage.SetItemAsync(SessionKeys.UserData, result.UserInfo);
+
+				_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtSettings.AuthScheme, result.UserInfo.Token);
 				_authNStateProvider.MarkUserAsAuthenticated(result.UserInfo.Token);
 			}
 
@@ -41,6 +48,8 @@ namespace WebAx.Client.Areas.Account
 		public async Task Logout()
 		{
 			await _sessionStorage.RemoveItemAsync(JwtSettings.UserTokenAccess);
+			await _sessionStorage.RemoveItemAsync(SessionKeys.UserData);
+
 			_authNStateProvider.MarkUserAsLoggedOut();
 			_httpClient.DefaultRequestHeaders.Authorization = null;
 		}
