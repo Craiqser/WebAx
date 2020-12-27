@@ -1,4 +1,5 @@
-﻿using CraB.Web;
+﻿using CraB.Core;
+using CraB.Web;
 using CraB.Web.Auth.Client;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
@@ -26,6 +27,12 @@ namespace WebAx.Client.Areas.Account.Register
 			{
 				Error = registerResponse.ErrorKey;
 			}
+		}
+
+		protected static string LG(string key)
+		{
+			string langId = "ru-RU";
+			return L.Get(key, langId);
 		}
 	}
 }

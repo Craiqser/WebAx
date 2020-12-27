@@ -2,26 +2,26 @@
 @layout AuthLayout
 @inherits RegisterPage
 <div class="block_center" style="height: 570px">
-	<div class="segment"><h1>User.Auth.Register</h1></div>
+	<div class="segment"><h1>@LG("Auth.SignUp")</h1></div>
 	@if (Error.Length > 0)
 	{
 		<div class="validation-message" role="alert">@Error</div>
 	}
 	<EditForm Model="@RegisterRequest" OnValidSubmit="@HandleRegisterAsync">
 		<DataAnnotationsValidator />
-		<label><InputText type="text" placeholder="Login" @bind-Value="RegisterRequest.Login" /></label>
-		<label><InputText type="text" placeholder="Email" @bind-Value="RegisterRequest.Email" /></label>
-		<label><InputText type="password" placeholder="Password" @bind-Value="RegisterRequest.Password" /></label>
-		<label><InputText type="password" placeholder="Confirm password" @bind-Value="RegisterRequest.PasswordConfirm" /></label>
+		<label><InputText type="text" placeholder="@LG("Auth.Login")" @bind-Value="RegisterRequest.Login" /></label>
+		<label><InputText type="text" placeholder="@LG("Auth.Email")" @bind-Value="RegisterRequest.Email" /></label>
+		<label><InputText type="password" placeholder="@LG("Auth.Password")" @bind-Value="RegisterRequest.Password" /></label>
+		<label><InputText type="password" placeholder="@LG("Auth.PasswordConfirm")" @bind-Value="RegisterRequest.PasswordConfirm" /></label>
 		<button type="submit" class="signin">
 			<div>
 				<svg width="20" height="20" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 					<path fill="#777" d="M448 88v336a23.94 23.94 0 0 1-24 24h-16a23.94 23.94 0 0 1-24-24V88a23.94 23.94 0 0 1 24-24h16a23.94 23.94 0 0 1 24 24z"></path>
 					<path fill="#999" d="M0 296.11V216a24 24 0 0 1 24-24h136v-88c0-17.82 21.51-26.73 34.11-14.12l152.26 152.45a19.4 19.4 0 0 1 0 27.34L194.14 422.09C181.54 434.7 160 425.79 160 408v-87.86H24a24 24 0 0 1-24-24.03z"></path>
 				</svg>
-				<span>&nbsp;User.Auth.Register</span>
+				<span>&nbsp;@LG("Auth.Register")</span>
 			</div>
 		</button>
-		<p class="plink">User.AccountAlready&nbsp;<NavLink class="link" href="/Account/Login">User.Auth.Login</NavLink></p>
+		<p class="plink">@LG("Auth.AccountHave")&nbsp;<NavLink class="link" href="/Account/Login">@LG("Auth.SignInBtn")</NavLink></p>
 	</EditForm>
 </div>
